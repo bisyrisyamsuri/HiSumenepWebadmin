@@ -1,0 +1,11 @@
+.wadah{
+    width: 25%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 160px;
+}
+@media screen and (max-width: 800px) {
+	.wadah{
+   		width: 80%;
+	}
+}
