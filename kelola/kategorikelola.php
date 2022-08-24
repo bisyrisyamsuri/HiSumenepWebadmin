@@ -55,7 +55,7 @@
                     placeholder = "masukkan latitude">
                     <label for="kategori">Kategori</label>
                     <br><select name="kategori" id="kategori">
-                    <option selected> Pilih </option>
+                    <option selected> Pilih Kategori </option>
                     <?php 
                     while($data=mysqli_fetch_array($kategori)) {
                     ?>
@@ -76,7 +76,7 @@
 				    </select>
                     <label for="wilayah">Wilayah</label>
                     <br><select name="wilayah" id="wilayah">
-                    <option selected> Pilih </option>
+                    <option selected> Pilih Wilayah</option>
                     <?php 
                     while($data=mysqli_fetch_array($wilayah)) {
                     ?>

@@ -1,3 +1,8 @@
+<?php
+    require_once('koneksi.php');
+    $kategori=mysqli_query($koneksi, "SELECT * FROM kategori");
+    $wilayah=mysqli_query($koneksi, "SELECT * FROM wilayah");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +37,7 @@
             <th>Wilayah</th>
             <th>Rekomendasi</th>
             <th>Popular</th>
+            <th>Upload File</th>
             <th>Aksi</th>
         </tr>
         <?php
@@ -50,6 +56,7 @@
             <td><?php echo $item_kategori['wilayah']; ?></td>
             <td><?php echo $item_kategori['rekomendasi']; ?></td>
             <td><?php echo $item_kategori['popular']; ?></td>
+            <td><a href="upload.php" target="_blank">Upload Disini</a></p></td>
             <td>
                 <button type="button" id="<?php echo $item_kategori['id'] ?>" 
                 class="w3-button w3-green update">Update</button>
@@ -96,9 +103,16 @@
                     class="w3-input w3-border w3-margin-buttom latitudeupdate" 
                     placeholder = "masukkan latitude">
                     <label for="kategoriupdate">Kategori</label>
-                    <input type="text" id="kategoriupdate" name="kategoriupdate"
-                    class="w3-input w3-border w3-margin-buttom kategoriupdate" 
-                    placeholder = "masukkan kategori">
+                    <br><select name="kategoriupdate" id="kategoriupdate">
+                    <option selected> Pilih Kategori </option>
+                    <?php 
+                    while($data=mysqli_fetch_array($kategori)) {
+                    ?>
+                    <option value="<?=$data['id']?>"><?=$data['kategori']?></option> 
+                    <?php
+                        }
+                    ?>
+                    </select></br>
                     <label for="hargaupdate">Harga</label>
                     <input type="text" id="hargaupdate" name="hargaupdate"
                     class="w3-input w3-border w3-margin-buttom hargaupdate" 
@@ -110,9 +124,16 @@
 						<option value="N">N</option>
 				    </select>
                     <label for="wilayahupdate">Wilayah</label>
-                    <input type="text" id="wilayahupdate" name="wilayahupdate"
-                    class="w3-input w3-border w3-margin-buttom wilayahupdate" 
-                    placeholder = "masukkan wilayah">
+                    <br><select name="wilayahupdate" id="wilayahupdate">
+                    <option selected> Pilih Wilayah </option>
+                    <?php 
+                    while($data=mysqli_fetch_array($wilayah)) {
+                    ?>
+                    <option value="<?=$data['id']?>"><?=$data['nama']?></option> 
+                    <?php
+                        }
+                    ?>
+                    </select></br>
                     <label for="rekomendasiupdate">Rekomendasi</label>
                     <select class="w3-input w3-border w3-margin-bottom pass" 
                     placeholder="rekomendasiupdate" id="rekomendasiupdate"  name="rekomendasiupdate">
@@ -170,7 +191,7 @@
                         $('#deskripsiupdate').val(response.deskripsi);
                         $('#longitudeupdate').val(response.longitud);
                         $('#latitudeupdate').val(response.latitude);
-                        $('#kategoriupdate').val(response.kategori);
+                        $('#kategorikategoriupdate').val(response.kategori);
                         $('#hargaupdate').val(response.harga);
                         $('#statusupdate').val(response.status);
                         $('#wilayahupdate').val(response.wilayah);
