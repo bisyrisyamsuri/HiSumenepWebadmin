@@ -1,51 +1,20 @@
-<!doctype html>
-<html>
- <head>
- <?php
- include("koneksi.php");
- 
- if(isset($_POST['but_upload'])){
- $maxsize = 52428800; // 5MB
- 
- $name = $_FILES['file']['name'];
- $target_dir = "galeri/";
- $target_file = $target_dir . $_FILES["file"]["name"];
+<?php
+require_once('koneksi.php');
 
- // Select file type
- $videoFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
- // Valid file extensions
- $extensions_arr = array("mp4","avi","3gp","mov","mpeg");
+if(isset($_POST['add'])){
+	$target_dir = "galeri/";
+	$target_file = $target_dir . basename($_FILES["uploadfile"]["name"]);
 
- // Check extension
- if( in_array($videoFileType,$extensions_arr) ){
- 
- // Check file size
- if(($_FILES['file']['size'] >= $maxsize) || ($_FILES["file"]["size"] == 0)) {
- echo "File too large. File must be less than 5MB.";
- }else{
- // Upload
- if(move_uploaded_file($_FILES['file']['tmp_name'],$target_file)){
- // Insert record
- $query = "INSERT INTO galeri(source) VALUES('".$target_file."')";
+	move_uploaded_file($_FILES["uploadfile"]["tmp_name"],$target_file);
 
- mysqli_query($koneksi,$query);
- echo "Upload successfully.";
- }
- }
+	// $uuid = Uuid::uuid4()->toString();
+	$nama = trim(mysqli_real_escape_string($koneksi, $_POST['namawisata']));
+	$source = "galeri/" . $_FILES["uploadfile"]["name"];
+	$tanggal = trim(mysqli_real_escape_string($koneksi, $_POST['date']));
+	$type = trim(mysqli_real_escape_string($koneksi, $_POST['type']));
+	// $no = trim(mysqli_real_escape_string($koneksi, $_POST['no']));
 
- }else{
- echo "Invalid file extension.";
- }
- 
- } 
- ?>
- </head>
- <body>
- <form method="post" action="" enctype='multipart/form-data'>
- <input type='file' name='file' />
- <input type='submit' value='Upload' name='but_upload'>
- </form>
-
- </body>
-</html>
+	mysqli_query($koneksi, "INSERT INTO galeri VALUES('$nama', '$source', '$tanggal', '$type')") or die(mysqli_error($koneksi));
+	echo "<script>window.location='kategorikelola.php';</script>";
+}

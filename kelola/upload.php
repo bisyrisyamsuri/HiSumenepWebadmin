@@ -28,10 +28,6 @@
                 ?>
                 </select>
 			</div>
-			<div class="form-group">
-				<label>Source </label>
-				<textarea class="form-control" name="source" required="required"></textarea>
-			</div>
             <div class="form-group">
 				<label>Tanggal </label>
                 <input type="date" name="date" value="<?php echo date("Y-m-d");?>">
@@ -45,9 +41,9 @@
 				    </select>
 			</div>
 			<div class="form-group">
-				<label>Foto </label>
+				<label>File </label>
 				<input type="file" name="foto" required="required">
-				<p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .gif</p>
+				<p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .gif | .mp4 | .avi | .3gp | .mov | .mpeg</p>
 			</div>			
 			<input type="submit" name="" value="Simpan" class="btn btn-primary">
 		</form>
