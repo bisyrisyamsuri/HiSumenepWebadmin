@@ -17,9 +17,9 @@ if(!in_array($ext,$ekstensi) ) {
 	if($ukuran < 52428800){		
 		$xx = $dir.$filename;
 		move_uploaded_file($_FILES['foto']['tmp_name'], $dir.$filename);
-		mysqli_query($koneksi, "INSERT INTO galeri(id_wisata, source, date, type) VALUES('$nama','$source', '$date', '$type')");
+		mysqli_query($koneksi, "INSERT INTO galeri(id_wisata, source, tanggal, type) VALUES('$nama','$source', '$date', '$type')");
 		header("location:kategorikelola.php?alert=berhasil");
 	}else{
-		header("location:upload.php?alert=gagak_ukuran");
+		header("location:upload.php?alert=gagal_ukuran");
 	}
 }
