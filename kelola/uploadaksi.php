@@ -20,6 +20,6 @@ if(!in_array($ext,$ekstensi) ) {
 		mysqli_query($koneksi, "INSERT INTO galeri(id_wisata, source, tanggal, type) VALUES('$nama','$path', '$date', '$type')");
 			header("location:kategorikelola.php?alert=berhasil");
 	}else{
-				header("location:upload.php?alert=gagal_ukuran");
-			}
+			header("location:upload.php?alert=gagal_ukuran");
 		}
+	}
